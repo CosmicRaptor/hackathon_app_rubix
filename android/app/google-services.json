@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "460585639171",
+    "project_id": "rubix25-bb41f",
+    "storage_bucket": "rubix25-bb41f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460585639171:android:5e2e82d6b74539f1d05d36",
+        "android_client_info": {
+          "package_name": "com.example.hackathon_app_rubix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460585639171-1nurgjs8qroebq3fq3s1damolej0bche.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hackathon_app_rubix",
+            "certificate_hash": "875a251e4b5afcfc70489a11c39544fb9b8116fb"
+          }
+        },
+        {
+          "client_id": "460585639171-q2bt8upq7lq6bej32pskg5dk9fvaprhs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ2jAh7Ye8lsK_w0OM3zd7174TzwKICFc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "460585639171-q2bt8upq7lq6bej32pskg5dk9fvaprhs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "460585639171-k0vgmcsdg03aqlkdhjj64a9v1r18m8q0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hackathonAppRubix"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
