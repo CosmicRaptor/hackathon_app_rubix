@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hackathon_app_rubix/widgets/level_marker.dart';
-
-import '../providers/user_provider.dart';
-import 'login_screen.dart';
+import 'package:hackathon_app_rubix/widgets/drawer.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -11,47 +8,162 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      //yellow-brown old paper color
-      backgroundColor: const Color(0xFFE0CDA1),
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Welcome back!'),
+        backgroundColor: Color(0xFFFBEEC1),
+        centerTitle: true,
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+          ),
+        ),
+        // backgroundColor: Colors.brown,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            Expanded(
-              child: ListView.builder(
-                itemCount: 100,
-                itemBuilder: (context, index) {
-                  if(index == 0){
-                    return const SizedBox();
-                  }
-                  return Padding(
-                    padding: EdgeInsets.all(8),
-                    child: SizedBox(
-                      width: 100,
-                      height: 200,
-                      child: LevelMarker(
-                        level: index,
-                        era: ['modern', 'medieval', 'ancient'][index % 3],
-                      ),
+      drawer: DrawerWidget(),
+      // Subtle gradient background
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFFFBEEC1), Color(0xFFE0CDA1)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // AppBar-style header
+              // Container(
+              //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+              //   color: Color(0xFFE0CDA1),
+              //   child: Text(
+              //     'Welcome Back!',
+              //     style: TextStyle(
+              //       fontSize: 28,
+              //       fontWeight: FontWeight.bold,
+              //       color: Colors.brown.shade700,
+              //     ),
+              //     textAlign: TextAlign.center,
+              //   ),
+              // ),
+              const SizedBox(height: 20),
+
+              // Streak and Rank Cards
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _buildCard(
+                      title: 'Daily Streak',
+                      value: '0',
+                      color: Colors.orange.shade100,
                     ),
-                  );
-                },
+                    _buildCard(
+                      title: 'Global Rank',
+                      value: '0',
+                      color: Colors.blue.shade100,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                ref.read(authNotifierProvider.notifier).signOut();
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
+              const SizedBox(height: 30),
+
+              // Fact of the Day Card
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
                   ),
-                );
-              },
-              child: const Text('Sign out'),
+                  elevation: 5,
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Fact of the Day',
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.brown,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Center(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: FlutterLogo(size: 150),
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        const Text(
+                          'Did you know? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                          style: TextStyle(fontSize: 16, color: Colors.black87),
+                          maxLines: 4,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 10),
+                        InkWell(
+                          onTap: () {
+                            // Action for "Read More"
+                          },
+                          child: const Text(
+                            'Read More...',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCard({required String title, required String value, required Color color}) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      elevation: 5,
+      color: color,
+      child: Container(
+        width: 150,
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.brown.shade700,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              value,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.brown.shade800,
+              ),
+              textAlign: TextAlign.center,
             ),
           ],
         ),
