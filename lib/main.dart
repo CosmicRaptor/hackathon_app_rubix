@@ -35,7 +35,11 @@ class MyApp extends ConsumerWidget {
           return MaterialApp(
             title: 'Flutter Demo',
             theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              colorScheme: ColorScheme.fromSeed(seedColor: Color(0x00f5f5f4)),
+              buttonTheme: ButtonThemeData(
+                buttonColor: Color(0x00b45309),
+                textTheme: ButtonTextTheme.primary,
+              ),
               useMaterial3: true,
               fontFamily: 'Cinzel',
             ),
