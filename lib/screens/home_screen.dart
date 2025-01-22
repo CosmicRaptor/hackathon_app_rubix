@@ -24,6 +24,9 @@ class HomeScreen extends ConsumerWidget {
               child: ListView.builder(
                 itemCount: 100,
                 itemBuilder: (context, index) {
+                  if(index == 0){
+                    return const SizedBox();
+                  }
                   return Padding(
                     padding: EdgeInsets.all(8),
                     child: SizedBox(

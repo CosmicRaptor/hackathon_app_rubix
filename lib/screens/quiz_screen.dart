@@ -18,6 +18,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
   int selectedIndex = 0;
   int correctAnswers = 0;
   int totalQuestions = 0;
+  Stopwatch s1 = Stopwatch();
 
   void passedFunction(int length, bool isCorrect) async {
     await Future.delayed(const Duration(seconds: 3));
@@ -40,9 +41,16 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
   }
 
   void navigateToResultScreen() {
+    s1.stop();
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => ResultScreen(
-            correctAnswers: correctAnswers, totalQuestions: totalQuestions)));
+            correctAnswers: correctAnswers, totalQuestions: totalQuestions, timeTaken: s1.elapsedMilliseconds/1000,)));
+  }
+
+  @override
+  void initState() {
+    s1.start();
+    super.initState();
   }
 
   @override
