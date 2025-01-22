@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hackathon_app_rubix/widgets/drawer.dart';
 
+import '../providers/leaderboard_provider.dart';
+import '../providers/user_provider.dart';
+
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
@@ -63,10 +66,18 @@ class HomeScreen extends ConsumerWidget {
                       value: '0',
                       color: Colors.orange.shade100,
                     ),
-                    _buildCard(
-                      title: 'Global Rank',
-                      value: '0',
-                      color: Colors.blue.shade100,
+                    FutureBuilder<int>(
+                      future: ref.read(leaderboardServiceProvider).getRank(ref.read(userProvider.notifier).state!.uid),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return const LinearProgressIndicator(color: Colors.blue);
+                        }
+                        return _buildCard(
+                          title: 'Your Rank',
+                          value: snapshot.data.toString(),
+                          color: Colors.blue.shade100,
+                        );
+                      },
                     ),
                   ],
                 ),
