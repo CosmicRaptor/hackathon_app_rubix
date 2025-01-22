@@ -5,6 +5,7 @@ import 'package:hackathon_app_rubix/screens/quiz_levels_list_screen.dart';
 import 'package:hackathon_app_rubix/screens/riddles_screen.dart';
 
 import '../providers/user_provider.dart';
+import '../screens/ar_screen.dart';
 import '../screens/home_screen.dart';
 import '../screens/login_screen.dart';
 
@@ -68,6 +69,17 @@ class DrawerWidget extends ConsumerWidget {
                   ),
                 );
               }
+          ),
+          ListTile(
+            title: const Text('AR View'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ARScreen(),
+                ),
+              );
+            },
           ),
           Expanded(
             child: Column(
