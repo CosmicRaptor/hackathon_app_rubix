@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hackathon_app_rubix/util/globals.dart';
 
 import '../screens/quiz_screen.dart';
 import '../services/question_service.dart';
@@ -21,6 +22,7 @@ class LevelMarker extends StatelessWidget {
       child: GestureDetector(
         onTap: (){
           //TODO: put the actual era here later
+          Globals.level = level;
           Navigator.push(context, MaterialPageRoute(builder: (context) => QuizScreen(args: QuestionServiceArgs(level: level, era: 'modern'),),),);
         },
         child: Stack(
