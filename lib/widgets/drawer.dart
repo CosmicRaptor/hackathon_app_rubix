@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hackathon_app_rubix/screens/quiz_levels_list_screen.dart';
+import 'package:hackathon_app_rubix/screens/riddles_screen.dart';
 
 import '../providers/user_provider.dart';
 import '../screens/home_screen.dart';
@@ -47,7 +48,14 @@ class DrawerWidget extends ConsumerWidget {
           ),
           ListTile(
             title: const Text('Riddles'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RiddlesScreen(),
+                ),
+              );
+            },
           ),
           ListTile(
               title: const Text('Leaderboard'),
