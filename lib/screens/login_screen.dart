@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 
 import '../models/user_model.dart';
 import '../providers/user_provider.dart';
@@ -22,19 +23,34 @@ class LoginScreen extends ConsumerWidget {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                //app icon
+                const SizedBox(
+                  height: 200,
+                  width: 200,
+                  child: FlutterLogo(),
+                ),
+                const SizedBox(height: 20,),
                 TextField(
                   controller: emailController,
                   decoration: const InputDecoration(
                     hintText: 'Email',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
                   ),
                 ),
+                const SizedBox(height: 10,),
                 TextField(
                   obscureText: true,
                   controller: passwordController,
                   decoration: const InputDecoration(
                     hintText: 'Password',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
                   ),
                 ),
+                const SizedBox(height: 20,),
                 ElevatedButton(
                   onPressed: () async {
                     await ref.read(authNotifierProvider.notifier).signInUser(
@@ -58,7 +74,9 @@ class LoginScreen extends ConsumerWidget {
                   },
                   child: const Text('Sign in'),
                 ),
-                ElevatedButton(
+                const SizedBox(height: 20,),
+                SignInButton(
+                  Buttons.google,
                   onPressed: () async {
                     await ref
                         .watch(authNotifierProvider.notifier)
@@ -77,7 +95,6 @@ class LoginScreen extends ConsumerWidget {
                       );
                     }
                   },
-                  child: const Text('Sign in with Google'),
                 ),
               ]),
         ),

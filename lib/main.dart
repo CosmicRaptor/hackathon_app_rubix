@@ -35,19 +35,22 @@ class MyApp extends ConsumerWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
         } else {
-          UserModel? user = ref.watch(userModelProvider.notifier).state;
-          QuizProgressModel? quizProgress = ref
-              .watch(
-                quizProgressProvider(
-                  QuizProgressServiceArgs(
-                      uid: ref.read(userProvider.notifier).state!.uid,
-                      level: 0,
-                      correctAnswers: 0,
-                      totalQuestions: 0),
-                ),
-              )
-              .value;
-          Globals.level = quizProgress?.level ?? 0;
+          UserModel? user = ref.read(userModelProvider.notifier).state;
+          if(user != null){
+            QuizProgressModel? quizProgress = ref
+                .watch(
+                  quizProgressProvider(
+                    QuizProgressServiceArgs(
+                        uid: ref.read(userProvider.notifier).state!.uid,
+                        level: 0,
+                        correctAnswers: 0,
+                        totalQuestions: 0,
+                    ),
+                  ),
+                )
+                .value;
+            Globals.level = quizProgress?.level ?? 0;
+          }
           return MaterialApp(
             title: 'Flutter Demo',
             theme: ThemeData(
