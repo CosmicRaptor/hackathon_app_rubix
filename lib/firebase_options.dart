@@ -63,9 +63,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '460585639171',
     projectId: 'rubix25-bb41f',
     storageBucket: 'rubix25-bb41f.firebasestorage.app',
-    androidClientId: '460585639171-1nurgjs8qroebq3fq3s1damolej0bche.apps.googleusercontent.com',
-    iosClientId: '460585639171-k0vgmcsdg03aqlkdhjj64a9v1r18m8q0.apps.googleusercontent.com',
+    androidClientId:
+        '460585639171-1nurgjs8qroebq3fq3s1damolej0bche.apps.googleusercontent.com',
+    iosClientId:
+        '460585639171-k0vgmcsdg03aqlkdhjj64a9v1r18m8q0.apps.googleusercontent.com',
     iosBundleId: 'com.example.hackathonAppRubix',
   );
-
 }

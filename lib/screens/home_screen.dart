@@ -23,13 +23,17 @@ class HomeScreen extends ConsumerWidget {
             Expanded(
               child: ListView.builder(
                 itemCount: 100,
-                itemBuilder: (context, index){
+                itemBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.all(8),
                     child: SizedBox(
                       width: 100,
-                        height: 200,
-                        child: LevelMarker(level: index, era: ['modern', 'medieval', 'ancient'][index % 3],),),
+                      height: 200,
+                      child: LevelMarker(
+                        level: index,
+                        era: ['modern', 'medieval', 'ancient'][index % 3],
+                      ),
+                    ),
                   );
                 },
               ),
@@ -37,7 +41,12 @@ class HomeScreen extends ConsumerWidget {
             ElevatedButton(
               onPressed: () {
                 ref.read(authNotifierProvider.notifier).signOut();
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen(),),);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginScreen(),
+                  ),
+                );
               },
               child: const Text('Sign out'),
             ),

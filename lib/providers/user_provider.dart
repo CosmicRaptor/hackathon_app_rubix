@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,8 +31,10 @@ class AuthNotifier extends StateNotifier<bool> {
     return await _authService.signInUser(email, password, context);
   }
 
-  Future<UserCredential?> registerUser(String email, String password, String name, String type, BuildContext context) async {
-    return await _authService.registerUser(email, password, name, type, context);
+  Future<UserCredential?> registerUser(String email, String password,
+      String name, String type, BuildContext context) async {
+    return await _authService.registerUser(
+        email, password, name, type, context);
   }
 
   Future<UserCredential?> signInWithGoogle(BuildContext context) async {
@@ -45,7 +46,8 @@ class AuthNotifier extends StateNotifier<bool> {
     if (user != null) {
       final userDoc = await _authService.usersCollection.doc(user.uid).get();
       if (userDoc.exists) {
-        _ref.read(userModelProvider.notifier).state = UserModel.fromMap(userDoc.data()!);
+        _ref.read(userModelProvider.notifier).state =
+            UserModel.fromMap(userDoc.data()!);
         return UserModel.fromMap(userDoc.data()!);
       }
     }

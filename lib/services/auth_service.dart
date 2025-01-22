@@ -8,9 +8,9 @@ import 'package:hackathon_app_rubix/util/show_snackbar.dart';
 import '../models/user_model.dart';
 
 final authServiceProvider = Provider((ref) => AuthService(
-  firebaseAuth: FirebaseAuth.instance,
-  firebaseStorage: FirebaseFirestore.instance,
-));
+      firebaseAuth: FirebaseAuth.instance,
+      firebaseStorage: FirebaseFirestore.instance,
+    ));
 
 class AuthService {
   final FirebaseAuth firebaseAuth;
@@ -20,7 +20,8 @@ class AuthService {
     required this.firebaseStorage,
   });
 
-  CollectionReference<Map<String, dynamic>> usersCollection = FirebaseFirestore.instance.collection('User');
+  CollectionReference<Map<String, dynamic>> usersCollection =
+      FirebaseFirestore.instance.collection('User');
   Stream<User?> get userCurrentState => firebaseAuth.authStateChanges();
   User? get user => firebaseAuth.currentUser;
 
@@ -28,9 +29,11 @@ class AuthService {
     await firebaseAuth.signOut();
   }
 
-  Future<UserCredential?> signInUser(String email, String password, BuildContext context) async {
+  Future<UserCredential?> signInUser(
+      String email, String password, BuildContext context) async {
     try {
-      UserCredential userCredential = await firebaseAuth.signInWithEmailAndPassword(
+      UserCredential userCredential =
+          await firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -40,8 +43,7 @@ class AuthService {
         showSnackbar(context, "No user found for that email.");
       } else if (e.code == 'wrong-password') {
         showSnackbar(context, "Wrong password provided for that user.");
-      }
-      else {
+      } else {
         showSnackbar(context, e.message.toString());
       }
       return null;
@@ -50,9 +52,11 @@ class AuthService {
 
   //register user with email and password
 
-  Future<UserCredential?> registerUser(String email, String password, String name, String type, BuildContext context) async {
+  Future<UserCredential?> registerUser(String email, String password,
+      String name, String type, BuildContext context) async {
     try {
-      UserCredential userCredential = await firebaseAuth.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -74,18 +78,18 @@ class AuthService {
   Future<UserCredential?> signInWithGoogle(BuildContext context) async {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn();
-      final GoogleSignInAccount? googleSignInAccount = await googleSignIn
-          .signIn();
+      final GoogleSignInAccount? googleSignInAccount =
+          await googleSignIn.signIn();
       if (googleSignInAccount != null) {
         final GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
+            await googleSignInAccount.authentication;
         final AuthCredential authCredential = GoogleAuthProvider.credential(
-            idToken: googleSignInAuthentication.idToken,
-            accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken,
         );
         //check if there's a document in the db
 
-         if(user != null)   {
+        if (user != null) {
           DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
               await usersCollection.doc(user!.uid).get();
           if (!documentSnapshot.exists) {
@@ -99,12 +103,12 @@ class AuthService {
         }
 
         // Getting users credential
-        UserCredential result = await firebaseAuth.signInWithCredential(authCredential);
+        UserCredential result =
+            await firebaseAuth.signInWithCredential(authCredential);
         return result;
       }
       return null;
-    }
-    on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       showSnackbar(context, e.message.toString());
       return null;
     }
@@ -112,7 +116,8 @@ class AuthService {
 
   Future<UserModel?> fetchUserDetails(User? user, BuildContext context) async {
     try {
-      DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await usersCollection.doc(user!.uid).get();
+      DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+          await usersCollection.doc(user!.uid).get();
       if (documentSnapshot.exists) {
         return UserModel.fromMap(documentSnapshot.data()!);
       }

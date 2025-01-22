@@ -57,8 +57,8 @@ class _QuestionWidgetState extends State<QuestionWidget> {
               tileColor: isSubmitted && isCorrectOption
                   ? Colors.green[100]
                   : isSubmitted && isSelectedOption && !isCorrectOption
-                  ? Colors.red[100]
-                  : null,
+                      ? Colors.red[100]
+                      : null,
               title: Text(
                 option,
                 style: TextStyle(
@@ -66,7 +66,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                       ? Colors.green
                       : Colors.black,
                   fontWeight:
-                  isSubmitted && isCorrectOption ? FontWeight.bold : null,
+                      isSubmitted && isCorrectOption ? FontWeight.bold : null,
                 ),
               ),
               leading: Radio(
@@ -75,22 +75,24 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                 onChanged: isSubmitted
                     ? null // Disable interaction after submission
                     : (value) {
-                  setState(() {
-                    selectedOption = value.toString();
-                    didSelectCorrect = selectedOption ==
-                        widget.question.options[widget.question.answerIndex];
-                  });
-                },
+                        setState(() {
+                          selectedOption = value.toString();
+                          didSelectCorrect = selectedOption ==
+                              widget.question
+                                  .options[widget.question.answerIndex];
+                        });
+                      },
               ),
               onTap: isSubmitted
                   ? null // Disable interaction after submission
                   : () {
-                setState(() {
-                  selectedOption = option;
-                  didSelectCorrect = selectedOption ==
-                      widget.question.options[widget.question.answerIndex];
-                });
-              },
+                      setState(() {
+                        selectedOption = option;
+                        didSelectCorrect = selectedOption ==
+                            widget
+                                .question.options[widget.question.answerIndex];
+                      });
+                    },
             ),
           );
         }),
@@ -98,11 +100,11 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           onPressed: isSubmitted
               ? null // Disable button after submission
               : () {
-            setState(() {
-              isSubmitted = true; // Mark as submitted
-            });
-            widget.submit(widget.length, didSelectCorrect);
-          },
+                  setState(() {
+                    isSubmitted = true; // Mark as submitted
+                  });
+                  widget.submit(widget.length, didSelectCorrect);
+                },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.green[200],
           ),

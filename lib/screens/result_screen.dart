@@ -9,9 +9,10 @@ import '../util/globals.dart';
 class ResultScreen extends ConsumerWidget {
   final int correctAnswers;
   final int totalQuestions;
-  const ResultScreen({super.key, required this.correctAnswers, required this.totalQuestions});
+  const ResultScreen(
+      {super.key, required this.correctAnswers, required this.totalQuestions});
 
-  void submitQuiz(BuildContext context, WidgetRef ref) async{
+  void submitQuiz(BuildContext context, WidgetRef ref) async {
     final String uid = ref.read(userProvider.notifier).state!.uid;
 
     final quizProgressNotifier = ref.read(quizProgressNotifierProvider(
@@ -46,7 +47,7 @@ class ResultScreen extends ConsumerWidget {
             Text('Correct Answers: $correctAnswers'),
             Text('Total Questions: $totalQuestions'),
             ElevatedButton(
-              onPressed: ()=>submitQuiz(context, ref),
+              onPressed: () => submitQuiz(context, ref),
               child: const Text('Go Back'),
             )
           ],

@@ -20,50 +20,67 @@ class LoginScreen extends ConsumerWidget {
         padding: const EdgeInsets.all(8.0),
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextField(
-                controller: emailController,
-                decoration: const InputDecoration(
-                  hintText: 'Email',
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                TextField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    hintText: 'Email',
+                  ),
                 ),
-              ),
-              TextField(
-                obscureText: true,
-                controller: passwordController,
-                decoration: const InputDecoration(
-                  hintText: 'Password',
+                TextField(
+                  obscureText: true,
+                  controller: passwordController,
+                  decoration: const InputDecoration(
+                    hintText: 'Password',
+                  ),
                 ),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  await ref.read(authNotifierProvider.notifier).signInUser(
-                    emailController.text,
-                    passwordController.text,
-                    context,
-                  );
-                  await ref.read(authNotifierProvider.notifier).fetchUserDetails();
-                  UserModel? user = ref.watch(userModelProvider.notifier).state;
-                  if (user != null) {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen(),),);
-                  }
-                },
-                child: const Text('Sign in'),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  await ref.watch(authNotifierProvider.notifier).signInWithGoogle(context);
-                  await ref.watch(authNotifierProvider.notifier).fetchUserDetails();
-                  UserModel? user = ref.watch(userModelProvider.notifier).state;
-                  if (user != null) {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen(),),);
-                  }
-                },
-                child: const Text('Sign in with Google'),
-              ),
-        ]
-            ),
-            ),
+                ElevatedButton(
+                  onPressed: () async {
+                    await ref.read(authNotifierProvider.notifier).signInUser(
+                          emailController.text,
+                          passwordController.text,
+                          context,
+                        );
+                    await ref
+                        .read(authNotifierProvider.notifier)
+                        .fetchUserDetails();
+                    UserModel? user =
+                        ref.watch(userModelProvider.notifier).state;
+                    if (user != null) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomeScreen(),
+                        ),
+                      );
+                    }
+                  },
+                  child: const Text('Sign in'),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    await ref
+                        .watch(authNotifierProvider.notifier)
+                        .signInWithGoogle(context);
+                    await ref
+                        .watch(authNotifierProvider.notifier)
+                        .fetchUserDetails();
+                    UserModel? user =
+                        ref.watch(userModelProvider.notifier).state;
+                    if (user != null) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomeScreen(),
+                        ),
+                      );
+                    }
+                  },
+                  child: const Text('Sign in with Google'),
+                ),
+              ]),
+        ),
       ),
     );
   }

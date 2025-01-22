@@ -19,19 +19,18 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
   int correctAnswers = 0;
   int totalQuestions = 0;
 
-  void passedFunction(int length, bool isCorrect) async{
+  void passedFunction(int length, bool isCorrect) async {
     await Future.delayed(const Duration(seconds: 3));
-    if(selectedIndex < length - 1){
+    if (selectedIndex < length - 1) {
       setState(() {
         selectedIndex++;
-        if(isCorrect){
+        if (isCorrect) {
           correctAnswers++;
           print('Correct Answers: $correctAnswers, total questions: $length');
         }
       });
-    }
-    else {
-      if(isCorrect){
+    } else {
+      if (isCorrect) {
         correctAnswers++;
         print('Correct Answers: $correctAnswers, total questions: $length');
       }
@@ -40,9 +39,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     }
   }
 
-  void navigateToResultScreen(){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ResultScreen(correctAnswers: correctAnswers, totalQuestions: totalQuestions)));
+  void navigateToResultScreen() {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => ResultScreen(
+            correctAnswers: correctAnswers, totalQuestions: totalQuestions)));
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,27 +52,30 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         title: Text('Quiz'),
       ),
       body: ref.watch(questionsProvider(widget.args)).when(
-        data: (questions) {
-          totalQuestions = questions.length;
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Text('Question ${selectedIndex+1}/${questions.length}'),
-                const SizedBox(height: 10),
-                QuestionWidget(key: ValueKey(selectedIndex), question: questions[selectedIndex], submit: passedFunction, length: questions.length),
-              ],
-            ),
-          );
-        },
-        loading: () => Center(child: CircularProgressIndicator()),
-        error: (error, stack) {
-          print('Error: $error');
-          // print('Stack: $stack');
-          return Center(child: Text('Error: $error'));
-        },
-      ),
+            data: (questions) {
+              totalQuestions = questions.length;
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Text('Question ${selectedIndex + 1}/${questions.length}'),
+                    const SizedBox(height: 10),
+                    QuestionWidget(
+                        key: ValueKey(selectedIndex),
+                        question: questions[selectedIndex],
+                        submit: passedFunction,
+                        length: questions.length),
+                  ],
+                ),
+              );
+            },
+            loading: () => Center(child: CircularProgressIndicator()),
+            error: (error, stack) {
+              print('Error: $error');
+              // print('Stack: $stack');
+              return Center(child: Text('Error: $error'));
+            },
+          ),
     );
   }
 }
-
