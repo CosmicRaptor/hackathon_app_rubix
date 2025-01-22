@@ -46,6 +46,10 @@ class DrawerWidget extends ConsumerWidget {
               }
           ),
           ListTile(
+            title: const Text('Riddles'),
+            onTap: () {},
+          ),
+          ListTile(
               title: const Text('Leaderboard'),
               onTap: () {}
           ),
