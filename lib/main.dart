@@ -8,33 +8,41 @@ import 'package:hackathon_app_rubix/screens/login_screen.dart';
 
 import 'firebase_options.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
-      ProviderScope(
-          child: const MyApp(),
-      ),
+    ProviderScope(
+      child: const MyApp(),
+    ),
   );
 }
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(authNotifierProvider.notifier).fetchUserDetails();
-    UserModel? user = ref.watch(userModelProvider.notifier).state;
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: user == null ? LoginScreen() : const HomeScreen(),
+    return FutureBuilder(
+      future: ref.watch(authNotifierProvider.notifier).fetchUserDetails(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        } else {
+          UserModel? user = ref.watch(userModelProvider.notifier).state;
+          return MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+              fontFamily: 'Cinzel',
+            ),
+            home: user == null ? LoginScreen() : const HomeScreen(),
+          );
+        }
+      },
     );
   }
 }

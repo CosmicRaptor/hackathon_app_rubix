@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hackathon_app_rubix/widgets/level_marker_island.dart';
+import 'package:hackathon_app_rubix/widgets/level_marker.dart';
 
 import '../providers/user_provider.dart';
 import 'login_screen.dart';
@@ -11,7 +11,8 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      //yellow-brown old paper color
+      backgroundColor: const Color(0xFFE0CDA1),
       appBar: AppBar(
         title: const Text('Home'),
       ),
@@ -28,7 +29,7 @@ class HomeScreen extends ConsumerWidget {
                     child: SizedBox(
                       width: 100,
                         height: 200,
-                        child: IslandLevelIndicator(level: index)),
+                        child: LevelMarker(level: index, era: ['ancient', 'medieval', 'modern'][index % 3],),),
                   );
                 },
               ),
