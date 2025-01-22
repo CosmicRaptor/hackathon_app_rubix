@@ -29,7 +29,7 @@ class HomeScreen extends ConsumerWidget {
                     child: SizedBox(
                       width: 100,
                         height: 200,
-                        child: LevelMarker(level: index, era: ['ancient', 'medieval', 'modern'][index % 3],),),
+                        child: LevelMarker(level: index, era: ['modern', 'medieval', 'ancient'][index % 3],),),
                   );
                 },
               ),

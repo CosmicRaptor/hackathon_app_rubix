@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../screens/quiz_screen.dart';
+import '../services/question_service.dart';
+
 class LevelMarker extends StatelessWidget {
   final int level;
   final String era;
@@ -15,31 +18,37 @@ class LevelMarker extends StatelessWidget {
     return SizedBox(
       width: 60,
       height: 60,
-      child: Stack(
-        children: [
-          Positioned.fill(
-            bottom: 30,
-            child: SvgPicture.asset(
-              era == 'ancient' ? ancientSvg : era == 'medieval' ? medievalSvg : modernSvg,
-              fit: BoxFit.contain,
-            ),
-          ),
-          //text comes below the icon
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Text(
-              'Level $level',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 22,
+      child: GestureDetector(
+        onTap: (){
+          //TODO: put the actual era here later
+          Navigator.push(context, MaterialPageRoute(builder: (context) => QuizScreen(args: QuestionServiceArgs(level: level, era: 'modern'),),),);
+        },
+        child: Stack(
+          children: [
+            Positioned.fill(
+              bottom: 30,
+              child: SvgPicture.asset(
+                era == 'ancient' ? ancientSvg : era == 'medieval' ? medievalSvg : modernSvg,
+                fit: BoxFit.contain,
               ),
             ),
-          ),
-        ],
+            //text comes below the icon
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Text(
+                'Level $level',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                ),
+              ),
+            ),
+          ],
+        ),
       )
     );
   }
