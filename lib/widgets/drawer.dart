@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hackathon_app_rubix/screens/leaderboard_screen.dart';
 import 'package:hackathon_app_rubix/screens/quiz_levels_list_screen.dart';
 import 'package:hackathon_app_rubix/screens/riddles_screen.dart';
 
@@ -59,7 +60,14 @@ class DrawerWidget extends ConsumerWidget {
           ),
           ListTile(
               title: const Text('Leaderboard'),
-              onTap: () {}
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LeaderboardScreen(),
+                  ),
+                );
+              }
           ),
           Expanded(
             child: Column(
