@@ -66,7 +66,7 @@ class _ARScreenState extends State<ARScreen> {
     final node = ARNode(
       type: NodeType.localGLTF2,
       uri: modelUri,
-      position: widget.modelToLoad != 'drawing_room' || widget.modelToLoad != 'kings_hall' ? Vector3(0.0, -0.25, -1.0) : Vector3(0, 0, 0), // Place it 1 meter in front and 1 meter below the camera
+      position: (widget.modelToLoad != 'drawing_room' && widget.modelToLoad != 'kings_hall') ? Vector3(0.0, -0.5, -1.0) : Vector3(0, 0, 0), // Place it 1 meter in front and 1 meter below the camera
       scale: Vector3(0.5, 0.5, 0.5),
     );
     await arObjectManager.addNode(node);
