@@ -3,9 +3,9 @@ import 'package:hackathon_app_rubix/services/post_service.dart';
 
 import '../models/post_model.dart';
 
-final PostNotifierProvider = StateNotifierProvider<PostNotifier, bool>((ref) => PostNotifier(ref));
+final PostNotifierProvider = StateNotifierProvider<PostNotifier, bool>((ref) => PostNotifier());
 final PostListProvider = FutureProvider.autoDispose<List<PostModel>>((ref) async {
-  final postNotifier = ref.watch(PostNotifierProvider.notifier);
+  final postNotifier = PostNotifier();
   return postNotifier.getPosts();
 });
 
@@ -15,9 +15,8 @@ final PostProvider = FutureProvider.family<PostModel, String>((ref, id) async {
 });
 
 class PostNotifier extends StateNotifier<bool>{
-  final Ref _ref;
-  late final PostService _postService = _ref.read(PostServiceProvider);
-  PostNotifier(this._ref) : super(false);
+  final PostService _postService = PostService();
+  PostNotifier() : super(false);
 
   Future<void> createPost(PostModel post) async {
     try {

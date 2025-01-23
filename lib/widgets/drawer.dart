@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hackathon_app_rubix/models/user_model.dart';
 import 'package:hackathon_app_rubix/screens/ar_list_screen.dart';
 import 'package:hackathon_app_rubix/screens/leaderboard_screen.dart';
+import 'package:hackathon_app_rubix/screens/posts_feed.dart';
 import 'package:hackathon_app_rubix/screens/quiz_levels_list_screen.dart';
 import 'package:hackathon_app_rubix/screens/riddles_screen.dart';
 import 'package:hackathon_app_rubix/screens/teacher_dashboard.dart';
@@ -83,12 +84,23 @@ class DrawerWidget extends ConsumerWidget {
                 }
               }),
           ListTile(
-            title: const Text('AR View'),
+            title: const Text('Virtual Tour'),
             onTap: () {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => ARListScreen(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Posts'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PostsFeed(),
                 ),
               );
             },

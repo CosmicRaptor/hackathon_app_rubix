@@ -3,7 +3,7 @@ class PostModel {
   final String title;
   final String? body;
   final String? imgUrl;
-  final int likes;
+  int likes;
 
   PostModel({
     required this.uid,
