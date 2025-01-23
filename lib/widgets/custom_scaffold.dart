@@ -32,6 +32,7 @@ class CustomScaffold extends StatelessWidget {
       floatingActionButton: floatingActionButton,
       drawer: drawer,
       body: Container(
+        height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/vintage2.png'),

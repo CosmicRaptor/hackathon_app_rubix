@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hackathon_app_rubix/api_key.dart';
 import 'package:hackathon_app_rubix/models/user_model.dart';
 import 'package:hackathon_app_rubix/providers/user_provider.dart';
 import 'package:hackathon_app_rubix/screens/home_screen.dart';
@@ -13,6 +15,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  Gemini.init(apiKey: gemini_api_key);
   runApp(
     ProviderScope(
       child: const MyApp(),

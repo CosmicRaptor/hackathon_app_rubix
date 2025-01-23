@@ -11,6 +11,7 @@ import 'package:hackathon_app_rubix/screens/teacher_dashboard.dart';
 import '../providers/user_provider.dart';
 import '../screens/home_screen.dart';
 import '../screens/login_screen.dart';
+import '../screens/old_language_translate_screen.dart';
 
 class DrawerWidget extends ConsumerWidget {
   const DrawerWidget({super.key});
@@ -40,7 +41,14 @@ class DrawerWidget extends ConsumerWidget {
               );
             },
           ),
-          ListTile(title: const Text('Profile'), onTap: () {}),
+          ListTile(title: const Text('Old language translator'), onTap: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => OldLanguageTranslateScreen(),
+              ),
+            );
+          }),
           ListTile(
               title: const Text('Quiz'),
               onTap: () {
