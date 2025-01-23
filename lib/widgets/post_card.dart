@@ -18,6 +18,7 @@ class _PostCardState extends State<PostCard> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12), // Rounded corners
       ),
+      color: Colors.brown.shade300,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -81,8 +82,8 @@ class _PostCardState extends State<PostCard> {
                       widget.post.likes++;
                     });
                   },
-                  icon: const Icon(Icons.thumb_up_alt_rounded,
-                      color: Colors.blue),
+                  icon: const Icon(Icons.favorite,
+                      color: Colors.red),
                 ),
               ],
             ),
