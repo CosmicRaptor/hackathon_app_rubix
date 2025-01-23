@@ -19,134 +19,143 @@ class DrawerWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Drawer(
-      backgroundColor: Color(0xFFFBEEC1),
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 50,
+      backgroundColor: Colors.transparent,
+      child: Container(
+        height: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/vintage3.png'),
+            repeat: ImageRepeat.repeat, // Repeats the texture in the body
           ),
-          //TODO: Put user pfp here
-          FlutterLogo(size: 100),
-          const SizedBox(
-            height: 20,
-          ),
-          ListTile(
-            title: const Text('Home'),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
-                ),
-              );
-            },
-          ),
-          ListTile(title: const Text('Old language translator'), onTap: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => OldLanguageTranslateScreen(),
-              ),
-            );
-          }),
-          ListTile(
-              title: const Text('Quiz'),
+        ),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 50,
+            ),
+            //TODO: Put user pfp here
+            FlutterLogo(size: 100),
+            const SizedBox(
+              height: 20,
+            ),
+            ListTile(
+              title: const Text('Home'),
               onTap: () {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => QuizMainScreen(),
+                    builder: (context) => HomeScreen(),
                   ),
                 );
-              }),
-          ListTile(
-            title: const Text('Riddles'),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => RiddlesScreen(),
-                ),
-              );
-            },
-          ),
-          ListTile(
-              title: const Text('Leaderboard'),
+              },
+            ),
+            ListTile(
+                title: const Text('Quiz'),
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => QuizMainScreen(),
+                    ),
+                  );
+                }),
+            ListTile(
+              title: const Text('Riddles'),
               onTap: () {
-                UserModel? user = ref.read(userModelProvider.notifier).state;
-                if (user != null && user.type == 'teacher') {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => TeacherDashboard(),
-                    ),
-                  );
-                } else {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LeaderboardScreen(),
-                    ),
-                  );
-                }
-              }),
-          ListTile(
-            title: const Text('Virtual Tour'),
-            onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RiddlesScreen(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+                title: const Text('Leaderboard'),
+                onTap: () {
+                  UserModel? user = ref.read(userModelProvider.notifier).state;
+                  if (user != null && user.type == 'teacher') {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TeacherDashboard(),
+                      ),
+                    );
+                  } else {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LeaderboardScreen(),
+                      ),
+                    );
+                  }
+                }),
+            ListTile(
+              title: const Text('Virtual Tour'),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ARListScreen(),
+                  ),
+                );
+              },
+            ),
+            ListTile(title: const Text('Old language translator'), onTap: () {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ARListScreen(),
+                  builder: (context) => OldLanguageTranslateScreen(),
                 ),
               );
-            },
-          ),
-          ListTile(
-            title: const Text('Posts'),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PostsFeed(),
-                ),
-              );
-            },
-          ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                // Sign Out Button
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      ref.read(authNotifierProvider.notifier).signOut();
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LoginScreen(),
+            }),
+            ListTile(
+              title: const Text('Posts'),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PostsFeed(),
+                  ),
+                );
+              },
+            ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  // Sign Out Button
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        ref.read(authNotifierProvider.notifier).signOut();
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.brown,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16, horizontal: 30),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.brown,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 16, horizontal: 30),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Text(
+                        'Sign Out',
+                        style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                     ),
-                    child: const Text(
-                      'Sign Out',
-                      style: TextStyle(fontSize: 18, color: Colors.white),
-                    ),
                   ),
-                ),
-              ],
-            ),
-          )
-        ],
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

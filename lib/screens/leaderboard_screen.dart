@@ -106,6 +106,7 @@ class LeaderboardScreen extends ConsumerWidget {
                     itemCount: users.length,
                     itemBuilder: (context, index) {
                       return Card(
+                        color: Colors.brown.shade300,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),
                         ),

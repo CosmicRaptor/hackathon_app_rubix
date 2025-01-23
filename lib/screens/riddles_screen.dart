@@ -57,12 +57,14 @@ class _RiddlesScreenState extends ConsumerState<RiddlesScreen> {
             data: (riddles) {
               noOfRiddles = riddles.length;
               Riddle riddle = riddles[selectedIndex];
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: RiddleCard(
-                  riddle: riddle,
-                  onSubmit: _onItemTapped,
-                  key: ValueKey(riddle),
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RiddleCard(
+                    riddle: riddle,
+                    onSubmit: _onItemTapped,
+                    key: ValueKey(riddle),
+                  ),
                 ),
               );
             },

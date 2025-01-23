@@ -101,7 +101,7 @@ class HomeScreen extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Text(
-                              'Fact of the Day',
+                              'Today in history',
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
@@ -114,14 +114,23 @@ class HomeScreen extends ConsumerWidget {
                         Center(
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
-                            child: FlutterLogo(size: 150),
+                            child: SizedBox(
+                              height: 175,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.asset(
+                                  'assets/California_Clipper_500.jpg',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                         const SizedBox(height: 15),
                         const Text(
-                          'Did you know? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                          'James W. Marshall discovered gold at Sutter\'s Mill in Coloma, California, triggering the California Gold Rush. This discovery attracted hundreds of thousands of people to California in search of wealth.',
                           style: TextStyle(fontSize: 16, color: Colors.black87),
-                          maxLines: 4,
+                          maxLines: 5,
                           overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 10),

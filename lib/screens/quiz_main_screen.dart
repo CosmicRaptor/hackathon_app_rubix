@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hackathon_app_rubix/screens/quiz_levels_list_screen.dart';
 import 'package:hackathon_app_rubix/widgets/custom_scaffold.dart';
 
@@ -62,17 +61,21 @@ class QuizMainScreen extends ConsumerWidget {
                   );
                 },
                 child: Card(
-                  child: Column(
-                    //3 cards, for 3 eras
-                    children: [
-                      //image, era name and description
-                      SizedBox(
-                        width: 100,
-                        height: 100,
-                          child: SvgPicture.asset('assets/pyramid.svg')),
-                      const Text('Ancient era'),
-                      const Text('Quiz yourself about ancient history. From early humans to the fall of the Roman Empire. From Egypt to India.'),
-                    ],
+                  color: Colors.brown.shade300,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      //3 cards, for 3 eras
+                      children: [
+                        //image, era name and description
+                        SizedBox(
+                          width: 100,
+                          height: 100,
+                            child: Image.asset('assets/pyramid.png', fit: BoxFit.fill,)),
+                        const Text('Ancient era', style: TextStyle(fontWeight: FontWeight.bold),),
+                        const Text('Quiz yourself about ancient history. From early humans to the fall of the Roman Empire. From Egypt to India.'),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -86,16 +89,20 @@ class QuizMainScreen extends ConsumerWidget {
                   );
                 },
                 child: Card(
-                  child: Column(
-                    //image, era name and description
-                    children: [
-                      SizedBox(
-                          width: 100,
-                          height: 100,
-                          child: SvgPicture.asset('assets/castle.svg')),
-                      const Text('Medieval era'),
-                      const Text('Quiz yourself about medieval history. From the fall of the Roman Empire to the Renaissance. From the Vikings to the Mongols.'),
-                    ],
+                  color: Colors.brown.shade300,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      //image, era name and description
+                      children: [
+                        SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: Image.asset('assets/medieval.png', fit: BoxFit.fill,)),
+                        const Text('Medieval era', style: TextStyle(fontWeight: FontWeight.bold),),
+                        const Text('Quiz yourself about medieval history. From the fall of the Roman Empire to the Renaissance. From the Vikings to the Mongols.'),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -109,16 +116,20 @@ class QuizMainScreen extends ConsumerWidget {
                   );
                 },
                 child: Card(
-                  child: Column(
-                    //image, era name and description
-                    children: [
-                      SizedBox(
-                          width: 100,
-                          height: 100,
-                          child: SvgPicture.asset('assets/factory.svg')),
-                      const Text('Modern era'),
-                      const Text('Quiz yourself about modern history. From the Renaissance to the present day. From the Industrial Revolution to the Space Age.'),
-                    ],
+                  color: Colors.brown.shade300,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      //image, era name and description
+                      children: [
+                        SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: Image.asset('assets/modern.png', fit: BoxFit.fill,)),
+                        const Text('Modern era', style: TextStyle(fontWeight: FontWeight.bold),),
+                        const Text('Quiz yourself about modern history. From the Renaissance to the present day. From the Industrial Revolution to the Space Age.'),
+                      ],
+                    ),
                   ),
                 ),
               ),

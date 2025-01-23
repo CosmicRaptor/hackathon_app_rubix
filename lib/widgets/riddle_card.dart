@@ -25,6 +25,7 @@ class _RiddleCardState extends State<RiddleCard> {
       margin: const EdgeInsets.all(16.0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       elevation: 4,
+      color: Colors.brown.shade300,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -84,7 +85,7 @@ class _RiddleCardState extends State<RiddleCard> {
                   widget.riddle.hint,
                   style: const TextStyle(
                     fontSize: 16,
-                    color: Colors.grey,
+                    // color: Colors,
                   ),
                   textAlign: TextAlign.center,
                 ),
