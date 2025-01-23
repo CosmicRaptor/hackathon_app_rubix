@@ -70,7 +70,7 @@ class HomeScreen extends ConsumerWidget {
                       future: ref.read(leaderboardServiceProvider).getRank(ref.read(userProvider.notifier).state!.uid),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.waiting) {
-                          return const LinearProgressIndicator(color: Colors.blue);
+                          return const CircularProgressIndicator(color: Colors.blue);
                         }
                         return _buildCard(
                           title: 'Your Rank',

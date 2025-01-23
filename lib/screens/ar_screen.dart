@@ -10,6 +10,9 @@ import 'package:hackathon_app_rubix/widgets/drawer.dart';
 import 'package:vector_math/vector_math_64.dart';
 
 class ARScreen extends StatefulWidget {
+  final String modelToLoad;
+
+  const ARScreen({Key? key, required this.modelToLoad}) : super(key: key);
   @override
   _ARScreenState createState() => _ARScreenState();
 }
@@ -59,11 +62,11 @@ class _ARScreenState extends State<ARScreen> {
   }
 
   Future<void> addGLBModel(ARObjectManager arObjectManager) async {
-    final modelUri = "assets/models/scene.gltf";
+    final modelUri = "assets/models/${widget.modelToLoad}/scene.gltf";
     final node = ARNode(
       type: NodeType.localGLTF2,
       uri: modelUri,
-      position: Vector3(0.0, 0.0, -1.0), // Place it 1 meter in front of the camera
+      position: widget.modelToLoad != 'drawing_room' || widget.modelToLoad != 'kings_hall' ? Vector3(0.0, -0.25, -1.0) : Vector3(0, 0, 0), // Place it 1 meter in front and 1 meter below the camera
       scale: Vector3(0.5, 0.5, 0.5),
     );
     await arObjectManager.addNode(node);

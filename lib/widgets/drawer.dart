@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hackathon_app_rubix/screens/ar_list_screen.dart';
 import 'package:hackathon_app_rubix/screens/leaderboard_screen.dart';
 import 'package:hackathon_app_rubix/screens/quiz_levels_list_screen.dart';
 import 'package:hackathon_app_rubix/screens/riddles_screen.dart';
 
 import '../providers/user_provider.dart';
-import '../screens/ar_screen.dart';
 import '../screens/home_screen.dart';
 import '../screens/login_screen.dart';
 
@@ -76,7 +76,7 @@ class DrawerWidget extends ConsumerWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ARScreen(),
+                  builder: (context) => ARListScreen(),
                 ),
               );
             },
