@@ -21,10 +21,14 @@ class DrawerWidget extends ConsumerWidget {
       backgroundColor: Color(0xFFFBEEC1),
       child: Column(
         children: [
-          const SizedBox(height: 50,),
+          const SizedBox(
+            height: 50,
+          ),
           //TODO: Put user pfp here
           FlutterLogo(size: 100),
-          const SizedBox(height: 20,),
+          const SizedBox(
+            height: 20,
+          ),
           ListTile(
             title: const Text('Home'),
             onTap: () {
@@ -36,10 +40,7 @@ class DrawerWidget extends ConsumerWidget {
               );
             },
           ),
-          ListTile(
-              title: const Text('Profile'),
-              onTap: () {}
-          ),
+          ListTile(title: const Text('Profile'), onTap: () {}),
           ListTile(
               title: const Text('Quiz'),
               onTap: () {
@@ -49,8 +50,7 @@ class DrawerWidget extends ConsumerWidget {
                     builder: (context) => QuizLevelsListScreen(),
                   ),
                 );
-              }
-          ),
+              }),
           ListTile(
             title: const Text('Riddles'),
             onTap: () {
@@ -66,15 +66,14 @@ class DrawerWidget extends ConsumerWidget {
               title: const Text('Leaderboard'),
               onTap: () {
                 UserModel? user = ref.read(userModelProvider.notifier).state;
-                if(user != null && user.type == 'teacher') {
+                if (user != null && user.type == 'teacher') {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => TeacherDashboard(),
                     ),
                   );
-                }
-                else {
+                } else {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -109,7 +108,6 @@ class DrawerWidget extends ConsumerWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-
                 // Sign Out Button
                 Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -125,7 +123,8 @@ class DrawerWidget extends ConsumerWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.brown,
-                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 30),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 30),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),

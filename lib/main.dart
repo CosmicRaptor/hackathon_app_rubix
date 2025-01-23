@@ -55,6 +55,10 @@ class MyApp extends ConsumerWidget {
                 buttonColor: Color(0x00b45309),
                 textTheme: ButtonTextTheme.primary,
               ),
+              appBarTheme: AppBarTheme(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ),
               useMaterial3: true,
               fontFamily: 'Cinzel',
             ),

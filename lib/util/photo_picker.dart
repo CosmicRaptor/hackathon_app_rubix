@@ -15,8 +15,7 @@ Future<String?> pickImage() async {
   try {
     await storageRef.putFile(File(image.path));
     return await storageRef.getDownloadURL();
-  }
-  catch (e) {
+  } catch (e) {
     print(e);
     return null;
   }

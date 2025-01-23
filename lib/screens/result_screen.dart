@@ -5,6 +5,7 @@ import 'package:hackathon_app_rubix/providers/user_provider.dart';
 import '../providers/quiz_progress_provider.dart';
 import '../services/quiz_progress_service.dart';
 import '../util/globals.dart';
+import '../widgets/custom_scaffold.dart';
 
 class ResultScreen extends ConsumerWidget {
   final int correctAnswers;
@@ -44,7 +45,7 @@ class ResultScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
+    return CustomScaffold(
       appBar: AppBar(
         title: const Text('Quiz Result'),
         backgroundColor: Colors.teal,
@@ -121,7 +122,7 @@ class ResultScreen extends ConsumerWidget {
                       _buildResultRow(
                         label: 'Score:',
                         value:
-                        '${((correctAnswers / totalQuestions) * 100).toStringAsFixed(1)}%',
+                            '${((correctAnswers / totalQuestions) * 100).toStringAsFixed(1)}%',
                         color: Colors.amber.shade700,
                       ),
                     ],

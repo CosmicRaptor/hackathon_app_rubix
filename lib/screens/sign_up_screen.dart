@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/user_model.dart';
 import '../providers/user_provider.dart';
+import '../widgets/custom_scaffold.dart';
 import 'home_screen.dart';
 
 class SignUpScreen extends ConsumerWidget {
@@ -10,14 +11,14 @@ class SignUpScreen extends ConsumerWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
-  TextEditingController();
+      TextEditingController();
   final TextEditingController nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     String userType = 'user';
 
-    return Scaffold(
+    return CustomScaffold(
       appBar: AppBar(
         title: const Text('Sign Up'),
       ),
@@ -109,12 +110,12 @@ class SignUpScreen extends ConsumerWidget {
                     }
 
                     await ref.read(authNotifierProvider.notifier).registerUser(
-                      emailController.text,
-                      passwordController.text,
-                      nameController.text,
-                      userType,
-                      context,
-                    );
+                          emailController.text,
+                          passwordController.text,
+                          nameController.text,
+                          userType,
+                          context,
+                        );
                     await ref
                         .read(authNotifierProvider.notifier)
                         .fetchUserDetails();

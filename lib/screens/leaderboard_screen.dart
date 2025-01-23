@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hackathon_app_rubix/providers/user_provider.dart';
 
 import '../providers/leaderboard_provider.dart';
+import '../widgets/custom_scaffold.dart';
 import '../widgets/drawer.dart';
 
 class LeaderboardScreen extends ConsumerWidget {
@@ -10,14 +11,15 @@ class LeaderboardScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final LeaderboardService leaderboardService = ref.watch(leaderboardServiceProvider);
-    return Scaffold(
+    final LeaderboardService leaderboardService =
+        ref.watch(leaderboardServiceProvider);
+    return CustomScaffold(
       // backgroundColor: Color(0xFFE0CDA1),
-      backgroundColor: Color(0xFFFBEEC1),
+      // backgroundColor: Color(0xFFFBEEC1),
       appBar: AppBar(
         title: const Text('Leaderboard'),
         centerTitle: true,
-        backgroundColor: Color(0xFFE0CDA1),
+        // backgroundColor: Color(0xFFE0CDA1),
       ),
       drawer: const DrawerWidget(),
       body: Column(
@@ -56,10 +58,12 @@ class LeaderboardScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 16),
                   FutureBuilder<int>(
-                    future: leaderboardService.getRank(ref.read(userProvider.notifier).state!.uid),
+                    future: leaderboardService
+                        .getRank(ref.read(userProvider.notifier).state!.uid),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator(color: Colors.white);
+                        return const CircularProgressIndicator(
+                            color: Colors.white);
                       }
                       return Text(
                         'Rank: ${snapshot.data}',
@@ -132,7 +136,8 @@ class LeaderboardScreen extends ConsumerWidget {
                         ),
                       );
                     },
-                    separatorBuilder: (context, index) => const SizedBox(height: 8),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 8),
                   );
                 } else {
                   return const Center(child: Text('No data available'));

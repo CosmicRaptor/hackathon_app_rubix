@@ -40,8 +40,7 @@ class LevelMarker extends StatelessWidget {
                   ),
                 ),
               );
-            }
-            else {
+            } else {
               showSnackbar(context, 'Level $level is locked');
             }
           },

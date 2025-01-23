@@ -5,6 +5,7 @@ import 'package:sign_in_button/sign_in_button.dart';
 
 import '../models/user_model.dart';
 import '../providers/user_provider.dart';
+import '../widgets/custom_scaffold.dart';
 import 'home_screen.dart';
 
 class LoginScreen extends ConsumerWidget {
@@ -14,7 +15,7 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
+    return CustomScaffold(
       appBar: AppBar(
         title: const Text('Login'),
       ),
@@ -55,10 +56,10 @@ class LoginScreen extends ConsumerWidget {
                 ElevatedButton(
                   onPressed: () async {
                     await ref.read(authNotifierProvider.notifier).signInUser(
-                      emailController.text,
-                      passwordController.text,
-                      context,
-                    );
+                          emailController.text,
+                          passwordController.text,
+                          context,
+                        );
                     await ref
                         .read(authNotifierProvider.notifier)
                         .fetchUserDetails();

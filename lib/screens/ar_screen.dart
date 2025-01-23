@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:hackathon_app_rubix/widgets/drawer.dart';
 import 'package:vector_math/vector_math_64.dart';
 
+import '../widgets/custom_scaffold.dart';
+
 class ARScreen extends StatefulWidget {
   final String modelToLoad;
 
@@ -23,8 +25,8 @@ class _ARScreenState extends State<ARScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('GLB Model in AR')),
+    return CustomScaffold(
+      appBar: AppBar(title: Text('Virtual Tour')),
       drawer: DrawerWidget(),
       body: Stack(
         children: [
@@ -37,11 +39,11 @@ class _ARScreenState extends State<ARScreen> {
   }
 
   void onARViewCreated(
-      ARSessionManager arSessionManager,
-      ARObjectManager arObjectManager,
-      ARAnchorManager arAnchorManager,
-      ARLocationManager arLocationManager,
-      ) {
+    ARSessionManager arSessionManager,
+    ARObjectManager arObjectManager,
+    ARAnchorManager arAnchorManager,
+    ARLocationManager arLocationManager,
+  ) {
     // Initialize the AR session
     arSessionManager.onInitialize(
       showFeaturePoints: false,
@@ -66,7 +68,11 @@ class _ARScreenState extends State<ARScreen> {
     final node = ARNode(
       type: NodeType.localGLTF2,
       uri: modelUri,
-      position: (widget.modelToLoad != 'drawing_room' && widget.modelToLoad != 'kings_hall') ? Vector3(0.0, -0.5, -1.0) : Vector3(0, 0, 0), // Place it 1 meter in front and 1 meter below the camera
+      position: (widget.modelToLoad != 'drawing_room' &&
+              widget.modelToLoad != 'kings_hall')
+          ? Vector3(0.0, -0.5, -1.0)
+          : Vector3(0, 0,
+              0), // Place it 1 meter in front and 1 meter below the camera
       scale: Vector3(0.5, 0.5, 0.5),
     );
     await arObjectManager.addNode(node);
@@ -79,4 +85,3 @@ class _ARScreenState extends State<ARScreen> {
     super.dispose();
   }
 }
-

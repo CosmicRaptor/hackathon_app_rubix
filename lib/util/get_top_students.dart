@@ -17,13 +17,13 @@ Future<List<UserModel>> getTopStudents() async {
     // print('UID: ${doc['uid']}'); // Debugging output
     // Fetch user details
     DocumentSnapshot userSnapshot =
-    await _firestore.collection('User').doc(doc['uid']).get();
+        await _firestore.collection('User').doc(doc['uid']).get();
     // print('User snapshot: ${userSnapshot.data()}'); // Debugging output
 
     // Map the data to a UserModel object
     if (userSnapshot.exists) {
       UserModel user =
-      UserModel.fromMap(userSnapshot.data() as Map<String, dynamic>);
+          UserModel.fromMap(userSnapshot.data() as Map<String, dynamic>);
       // print('User: ${user.name}'); // Debugging output
 
       // Check if the user is a student

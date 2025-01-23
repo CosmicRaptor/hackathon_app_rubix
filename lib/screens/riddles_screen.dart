@@ -4,6 +4,7 @@ import 'package:hackathon_app_rubix/widgets/riddle_card.dart';
 
 import '../models/riddle_model.dart';
 import '../services/riddle_service.dart';
+import '../widgets/custom_scaffold.dart';
 import '../widgets/drawer.dart';
 
 class RiddlesScreen extends ConsumerStatefulWidget {
@@ -27,17 +28,16 @@ class _RiddlesScreenState extends ConsumerState<RiddlesScreen> {
   }
 
   void _onItemTapped(bool isCorrect) {
-    if(selectedIndex < noOfRiddles - 1){
+    if (selectedIndex < noOfRiddles - 1) {
       setState(() {
         selectedIndex++;
       });
-      if(isCorrect){
+      if (isCorrect) {
         correct++;
       }
       attempted++;
-    }
-    else {
-      if(isCorrect){
+    } else {
+      if (isCorrect) {
         correct++;
       }
       attempted++;
@@ -45,27 +45,32 @@ class _RiddlesScreenState extends ConsumerState<RiddlesScreen> {
       // navigateToResultScreen();
     }
   }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
       appBar: AppBar(
         title: const Text('Riddles'),
       ),
       drawer: DrawerWidget(),
       body: ref.watch(riddlesProvider).when(
-        data: (riddles) {
-          noOfRiddles = riddles.length;
-          Riddle riddle = riddles[selectedIndex];
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: RiddleCard(riddle: riddle, onSubmit: _onItemTapped, key: ValueKey(riddle),),
-            ),
-          );
-        },
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stackTrace) => Center(child: Text('Error: $error')),
-      ),
+            data: (riddles) {
+              noOfRiddles = riddles.length;
+              Riddle riddle = riddles[selectedIndex];
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RiddleCard(
+                    riddle: riddle,
+                    onSubmit: _onItemTapped,
+                    key: ValueKey(riddle),
+                  ),
+                ),
+              );
+            },
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (error, stackTrace) => Center(child: Text('Error: $error')),
+          ),
     );
   }
 }

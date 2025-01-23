@@ -6,6 +6,8 @@ import 'package:hackathon_app_rubix/providers/user_provider.dart';
 import 'package:hackathon_app_rubix/screens/posts_feed.dart';
 import 'package:hackathon_app_rubix/util/photo_picker.dart';
 
+import '../widgets/custom_scaffold.dart';
+
 class CreatePostScreen extends ConsumerWidget {
   CreatePostScreen({super.key});
   final TextEditingController _titleController = TextEditingController();
@@ -14,7 +16,7 @@ class CreatePostScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     String? imgUrl;
-    return Scaffold(
+    return CustomScaffold(
       appBar: AppBar(
         title: const Text('Create Post'),
       ),
@@ -49,16 +51,16 @@ class CreatePostScreen extends ConsumerWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              ref.read(PostNotifierProvider.notifier).createPost(
-                PostModel(
-                  title: _titleController.text,
-                  body: _bodyController.text,
-                  imgUrl: imgUrl,
-                  uid: ref.read(userProvider.notifier).state!.uid,
-                )
-              ).whenComplete(
-                () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PostsFeed()))
-              );
+              ref
+                  .read(PostNotifierProvider.notifier)
+                  .createPost(PostModel(
+                    title: _titleController.text,
+                    body: _bodyController.text,
+                    imgUrl: imgUrl,
+                    uid: ref.read(userProvider.notifier).state!.uid,
+                  ))
+                  .whenComplete(() => Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => PostsFeed())));
             },
             child: const Text('Create Post'),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon_app_rubix/widgets/drawer.dart';
 
+import '../widgets/custom_scaffold.dart';
 import '../widgets/level_marker.dart';
 
 class QuizLevelsListScreen extends StatelessWidget {
@@ -8,7 +9,7 @@ class QuizLevelsListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
       appBar: AppBar(
         title: const Text('Quiz Levels'),
       ),
@@ -19,7 +20,7 @@ class QuizLevelsListScreen extends StatelessWidget {
           child: ListView.builder(
             itemCount: 100,
             itemBuilder: (context, index) {
-              if(index == 0){
+              if (index == 0) {
                 return const SizedBox();
               }
               return Padding(

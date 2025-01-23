@@ -6,7 +6,7 @@ final PostServiceProvider = Provider((ref) => PostService());
 
 class PostService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  
+
   Future<void> createPost(PostModel post) async {
     try {
       await _firestore.collection('posts').add(post.toJson());
@@ -14,16 +14,18 @@ class PostService {
       throw Exception(e);
     }
   }
-  
+
   Future<List<PostModel>> getPosts() async {
     try {
       final snapshot = await _firestore.collection('posts').get();
-      return snapshot.docs.map((doc) => PostModel.fromJson(doc.data())).toList();
+      return snapshot.docs
+          .map((doc) => PostModel.fromJson(doc.data()))
+          .toList();
     } catch (e) {
       throw Exception(e);
     }
   }
-  
+
   Future<PostModel> getPost(String id) async {
     try {
       final snapshot = await _firestore.collection('posts').doc(id).get();

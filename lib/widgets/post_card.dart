@@ -58,7 +58,7 @@ class _PostCardState extends State<PostCard> {
                     return const Center(child: CircularProgressIndicator());
                   },
                   errorBuilder: (context, error, stackTrace) =>
-                  const Icon(Icons.error, size: 100, color: Colors.red),
+                      const Icon(Icons.error, size: 100, color: Colors.red),
                 ),
               ),
             if (widget.post.imgUrl != null) const SizedBox(height: 10),
@@ -81,7 +81,8 @@ class _PostCardState extends State<PostCard> {
                       widget.post.likes++;
                     });
                   },
-                  icon: const Icon(Icons.thumb_up_alt_rounded, color: Colors.blue),
+                  icon: const Icon(Icons.thumb_up_alt_rounded,
+                      color: Colors.blue),
                 ),
               ],
             ),

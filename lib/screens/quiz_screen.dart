@@ -5,6 +5,7 @@ import 'package:hackathon_app_rubix/widgets/question_widget.dart';
 
 import '../services/question_service.dart';
 import '../providers/question_provider.dart';
+import '../widgets/custom_scaffold.dart';
 
 class QuizScreen extends ConsumerStatefulWidget {
   final QuestionServiceArgs args;
@@ -44,7 +45,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     s1.stop();
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => ResultScreen(
-            correctAnswers: correctAnswers, totalQuestions: totalQuestions, timeTaken: s1.elapsedMilliseconds/1000,)));
+              correctAnswers: correctAnswers,
+              totalQuestions: totalQuestions,
+              timeTaken: s1.elapsedMilliseconds / 1000,
+            )));
   }
 
   @override
@@ -55,7 +59,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
       appBar: AppBar(
         title: Text('Quiz'),
       ),
