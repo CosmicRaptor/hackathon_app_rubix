@@ -10,5 +10,12 @@ final geminiPromptStreamProvider = StreamProvider<Candidates?>((ref) {
   final promtLang = ref.watch(promptLanguageProvider); // Get the current prompt language
 
   final geminiService = Gemini.instance; // Replace with actual service
-  return geminiService.promptStream(parts: [Part.text('Convert the following text to ${promtLang != 'Random' ? promtLang : 'any ancient language'} of your choice. After the translation, provide a brief overview(less than 100 words) of the language you used, and its origins. Do not send anything else.'), Part.text(prompt)]); // Pass the prompt to the stream
+  return geminiService.promptStream(parts: [
+    Part.text(
+        'Translate the following text into ${promtLang != "Random" ? promtLang : "an ancient language of your choice"}.'
+            ' Only provide the translation in a single string. '
+            ' After the translation, provide a brief overview (less than 100 words) of the language you used, its origins, and its cultural significance, in Latin characters only.'
+    ),
+    Part.text(prompt)
+  ]);
 });

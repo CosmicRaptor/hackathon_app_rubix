@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hackathon_app_rubix/services/tts_service.dart';
 import 'package:hackathon_app_rubix/widgets/custom_scaffold.dart';
 import 'package:hackathon_app_rubix/widgets/drawer.dart';
 
@@ -17,6 +18,18 @@ class _OldLanguageTranslateScreenState extends ConsumerState<OldLanguageTranslat
   final TextEditingController _textController = TextEditingController();
   bool toShowTranslation = false;
   String textOutput = '';
+  String dropdownValue = 'Old English';
+  TTSservice t1 = TTSservice('');
+  bool isSpeaking = false;
+
+  void initialiseTts(){
+    t1 = TTSservice(textOutput);
+  }
+
+  bool toggleSpeaking(){
+    isSpeaking = !isSpeaking;
+    return isSpeaking;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +74,12 @@ class _OldLanguageTranslateScreenState extends ConsumerState<OldLanguageTranslat
                     children: [
                       Text('Destination: ', style: TextStyle(fontSize: 18),),
                       DropdownButton<String>(
-                        value: 'Old English',
+                        value: dropdownValue,
                         onChanged: (String? newValue) {
-                          ref.read(promptLanguageProvider.notifier).state = newValue ?? 'Old English';
+                          setState(() {
+                            dropdownValue = newValue ?? 'Old English';
+                            ref.read(promptLanguageProvider.notifier).state = newValue ?? 'Old English';
+                          });
                         },
                         items: <String>['Old English', 'Old greek', 'Sanskrit', 'Latin', 'Random']
                             .map<DropdownMenuItem<String>>((String value) {
@@ -113,13 +129,28 @@ class _OldLanguageTranslateScreenState extends ConsumerState<OldLanguageTranslat
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      Text('Translated Text', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Translated Text', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                          IconButton(onPressed: (){
+                            // initialiseTts();
+                            if(t1.isSpeaking){
+                              t1.stop();
+                            }
+                            else {
+                              t1.speak();
+                            }
+                          }, icon: t1.isSpeaking ? Icon(Icons.stop) : Icon(Icons.volume_up), color: Colors.blue,),
+                        ],
+                      ),
                       const SizedBox(height: 10),
                       ref.watch(geminiPromptStreamProvider).when(
                         data: (Candidates? candidates) {
                           // String text = '';
                           if(candidates != null){
-                            textOutput += candidates.output ?? '';
+                            textOutput += ' ${candidates.output} ';
+                            initialiseTts();
                             return Text(textOutput);
                           }
                           return const Text('No translation available');
