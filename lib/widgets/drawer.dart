@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hackathon_app_rubix/models/user_model.dart';
 import 'package:hackathon_app_rubix/screens/ar_list_screen.dart';
 import 'package:hackathon_app_rubix/screens/leaderboard_screen.dart';
 import 'package:hackathon_app_rubix/screens/quiz_levels_list_screen.dart';
 import 'package:hackathon_app_rubix/screens/riddles_screen.dart';
+import 'package:hackathon_app_rubix/screens/teacher_dashboard.dart';
 
 import '../providers/user_provider.dart';
 import '../screens/home_screen.dart';
@@ -62,14 +64,24 @@ class DrawerWidget extends ConsumerWidget {
           ListTile(
               title: const Text('Leaderboard'),
               onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LeaderboardScreen(),
-                  ),
-                );
-              }
-          ),
+                UserModel? user = ref.read(userModelProvider.notifier).state;
+                if(user != null && user.type == 'teacher') {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TeacherDashboard(),
+                    ),
+                  );
+                }
+                else {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LeaderboardScreen(),
+                    ),
+                  );
+                }
+              }),
           ListTile(
             title: const Text('AR View'),
             onTap: () {
