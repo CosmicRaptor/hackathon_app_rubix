@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hackathon_app_rubix/util/globals.dart';
 import 'package:hackathon_app_rubix/util/show_snackbar.dart';
 
@@ -32,11 +31,11 @@ class LevelMarker extends StatelessWidget {
             //TODO: put the actual era here later
             if (!isLocked) {
               Globals.level = level;
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => QuizScreen(
-                    args: QuestionServiceArgs(level: level, era: 'modern'),
+                    args: QuestionServiceArgs(level: level, era: era),
                   ),
                 ),
               );
@@ -48,17 +47,7 @@ class LevelMarker extends StatelessWidget {
             children: [
               Positioned.fill(
                 bottom: 30,
-                child: SvgPicture.asset(
-                  era == 'ancient'
-                      ? ancientSvg
-                      : era == 'medieval'
-                          ? medievalSvg
-                          : modernSvg,
-                  fit: BoxFit.contain,
-                  colorFilter: isLocked
-                      ? ColorFilter.mode(Colors.grey, BlendMode.saturation)
-                      : null,
-                ),
+                child: Image.asset('assets/shield.png', fit: BoxFit.contain),
               ),
               //text comes below the icon
               Positioned(

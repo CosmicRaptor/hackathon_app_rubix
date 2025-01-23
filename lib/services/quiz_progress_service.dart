@@ -55,7 +55,7 @@ class QuizProgressService {
     if (quizProgress != null) {
       correctAnswers += quizProgress.correctAnswers;
       totalQuestions += quizProgress.totalQuestions;
-      level = quizProgress.level;
+      level = quizProgress.level + 1;
     }
     await quizProgressDoc.set({
       'uid': uid,

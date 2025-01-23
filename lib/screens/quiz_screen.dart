@@ -53,6 +53,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
 
   @override
   void initState() {
+    // if(widget.args.level == Globals.level){
+    //   Globals.level++;
+    // }
     s1.start();
     super.initState();
   }

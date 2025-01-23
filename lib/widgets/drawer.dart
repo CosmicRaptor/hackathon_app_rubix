@@ -4,7 +4,7 @@ import 'package:hackathon_app_rubix/models/user_model.dart';
 import 'package:hackathon_app_rubix/screens/ar_list_screen.dart';
 import 'package:hackathon_app_rubix/screens/leaderboard_screen.dart';
 import 'package:hackathon_app_rubix/screens/posts_feed.dart';
-import 'package:hackathon_app_rubix/screens/quiz_levels_list_screen.dart';
+import 'package:hackathon_app_rubix/screens/quiz_main_screen.dart';
 import 'package:hackathon_app_rubix/screens/riddles_screen.dart';
 import 'package:hackathon_app_rubix/screens/teacher_dashboard.dart';
 
@@ -47,7 +47,7 @@ class DrawerWidget extends ConsumerWidget {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => QuizLevelsListScreen(),
+                    builder: (context) => QuizMainScreen(),
                   ),
                 );
               }),
