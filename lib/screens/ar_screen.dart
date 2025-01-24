@@ -6,9 +6,10 @@ import 'package:ar_flutter_plugin_flutterflow/managers/ar_session_manager.dart';
 import 'package:ar_flutter_plugin_flutterflow/models/ar_node.dart';
 import 'package:ar_flutter_plugin_flutterflow/widgets/ar_view.dart';
 import 'package:flutter/material.dart';
-import 'package:hackathon_app_rubix/widgets/drawer.dart';
+import 'package:hackathon_app_rubix/util/get_ar_sites_info.dart';
 import 'package:vector_math/vector_math_64.dart';
 
+import '../services/tts_service.dart';
 import '../widgets/custom_scaffold.dart';
 
 class ARScreen extends StatefulWidget {
@@ -22,12 +23,28 @@ class ARScreen extends StatefulWidget {
 class _ARScreenState extends State<ARScreen> {
   late ARSessionManager arSessionManager;
   late ARObjectManager arObjectManager;
+  late final TTSservice t1;
+
+  @override
+  void initState() {
+    t1 = TTSservice(getArSitesInfo(widget.modelToLoad));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      appBar: AppBar(title: Text('Virtual Tour')),
-      drawer: DrawerWidget(),
+      appBar: AppBar(title: Text('Virtual Tour'), actions: [
+        IconButton(onPressed: (){
+          if(t1.isSpeaking){
+            t1.stop();
+          }
+          else {
+            t1.speak();
+          }
+        }, icon: Icon(Icons.volume_up))
+      ],),
+      // drawer: DrawerWidget(),
       body: Stack(
         children: [
           ARView(

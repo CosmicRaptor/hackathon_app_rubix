@@ -90,6 +90,7 @@ flutter:
     - assets/award_models/bronze/
     - assets/award_models/silver/
     - assets/award_models/gold/
+    - assets/ar_card_desc_images/
 #    - assets/models/titanic_wreck/textures/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
