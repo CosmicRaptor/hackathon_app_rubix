@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -60,11 +61,12 @@ class AuthService {
         email: email,
         password: password,
       );
+      String? token = await FirebaseMessaging.instance.getToken();
       await usersCollection.doc(userCredential.user!.uid).set({
         'email': email,
         'name': name,
         'type': type,
-        'fcmToken': '',
+        'fcmToken': token,
       });
       return userCredential;
     } on FirebaseAuthException catch (e) {
@@ -90,16 +92,16 @@ class AuthService {
         //check if there's a document in the db
 
         if (user != null) {
-          DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-              await usersCollection.doc(user!.uid).get();
-          if (!documentSnapshot.exists) {
+          // DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+          //     await usersCollection.doc(user!.uid).get();
+            String? token = await FirebaseMessaging.instance.getToken();
+            print('Token: $token');
             await usersCollection.doc(user!.uid).set({
               'email': user!.email,
               'name': user!.displayName,
               'type': 'user1',
-              'fcmToken': '',
+              'fcmToken': token,
             });
-          }
         }
 
         // Getting users credential
