@@ -22,7 +22,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
   Stopwatch s1 = Stopwatch();
 
   void passedFunction(int length, bool isCorrect) async {
-    // await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
     if (selectedIndex < length - 1) {
       setState(() {
         selectedIndex++;

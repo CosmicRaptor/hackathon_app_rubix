@@ -148,20 +148,20 @@ class ResultScreen extends ConsumerWidget {
                       _buildResultRow(
                         label: 'Correct Answers:',
                         value: '$correctAnswers / $totalQuestions',
-                        color: Colors.green.shade700,
+                        // color: Colors.green.shade700,
                       ),
                       const SizedBox(height: 10),
                       _buildResultRow(
                         label: 'Time Taken:',
                         value: '${timeTaken.toStringAsFixed(2)} seconds',
-                        color: Colors.blue.shade700,
+                        // color: Colors.blue.shade700,
                       ),
                       const SizedBox(height: 10),
                       _buildResultRow(
                         label: 'Score:',
                         value:
                             '${((correctAnswers / totalQuestions) * 100).toStringAsFixed(1)}%',
-                        color: Colors.amber.shade700,
+                        // color: Colors.amber.shade700,
                       ),
                     ],
                   ),
@@ -201,7 +201,7 @@ class ResultScreen extends ConsumerWidget {
   Widget _buildResultRow({
     required String label,
     required String value,
-    required Color color,
+    // required Color color,
   }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -218,7 +218,6 @@ class ResultScreen extends ConsumerWidget {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: color,
           ),
         ),
       ],
