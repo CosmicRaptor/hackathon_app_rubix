@@ -51,6 +51,14 @@ void main() async {
       print('Message notification: ${message.notification?.body}');
     }
 
+    if (message.notification != null) {
+      final title = message.notification?.title ?? 'New Notification';
+      final body = message.notification?.body ?? 'You have a new message';
+
+      // Use a GlobalKey to access the ScaffoldMessenger
+      MyApp.showSnackbar(title, body);
+    }
+
     _messageStreamController.sink.add(message);
   });
 
@@ -66,6 +74,18 @@ void main() async {
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
+
+  static final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+  GlobalKey<ScaffoldMessengerState>();
+
+  static void showSnackbar(String title, String body) {
+    final snackBar = SnackBar(
+      content: Text('$title: $body'),
+      duration: const Duration(seconds: 3),
+    );
+    print('Showing snackbar');
+    scaffoldMessengerKey.currentState?.showSnackBar(snackBar);
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -116,10 +116,11 @@ class HomeScreen extends ConsumerWidget {
                             borderRadius: BorderRadius.circular(10),
                             child: SizedBox(
                               height: 175,
+                              width: double.infinity,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.asset(
-                                  'assets/California_Clipper_500.jpg',
+                                  'assets/claudius.jpg',
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -128,7 +129,7 @@ class HomeScreen extends ConsumerWidget {
                         ),
                         const SizedBox(height: 15),
                         const Text(
-                          'James W. Marshall discovered gold at Sutter\'s Mill in Coloma, California, triggering the California Gold Rush. This discovery attracted hundreds of thousands of people to California in search of wealth.',
+                          'Following the assassination of Caligula, Claudius was declared emperor by the Praetorian Guard. His reign saw significant expansion and stabilization of the Roman Empire.',
                           style: TextStyle(fontSize: 16, color: Colors.black87),
                           maxLines: 5,
                           overflow: TextOverflow.ellipsis,

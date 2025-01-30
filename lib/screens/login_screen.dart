@@ -26,10 +26,10 @@ class LoginScreen extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 // App Icon
-                const SizedBox(
+                SizedBox(
                   height: 200,
                   width: 200,
-                  child: FlutterLogo(),
+                  child: Image.asset('assets/app_logo.png'),
                 ),
                 const SizedBox(height: 20),
                 TextField(

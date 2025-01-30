@@ -34,7 +34,10 @@ class DrawerWidget extends ConsumerWidget {
               height: 50,
             ),
             //TODO: Put user pfp here
-            FlutterLogo(size: 100),
+            SizedBox(
+              height: 100,
+              child: Image.asset('assets/app_logo_black.png'),
+            ),
             const SizedBox(
               height: 20,
             ),
